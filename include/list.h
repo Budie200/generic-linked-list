@@ -1,21 +1,25 @@
 #ifndef LIST_H
 #define LIST_H
 
-typedef enum data_type{
-CHAR, SHORT, INT, LONG, FLOAT, DOUBLE, LONG_DOUBLE, LONG_LONG
-} datum;
+#define LIST(name, type)   \
+    struct name            \
+    {                      \
+        type value;        \
+        struct name *prev; \
+        struct name *next; \
+    };
 
-struct node{
-    void* value;
-    struct node* prev;
-    struct node* next;
-};
+#define INIT_LIST(node_ptr, val)                                        \
+    do                                                                  \
+    {                                                                   \
+        (node_ptr) = (__typeof__(node_ptr))malloc(sizeof(*(node_ptr))); \
+        if (node_ptr)                                                   \
+        {                                                               \
+            (node_ptr)->value = (val);                                  \
+            (node_ptr)->prev = NULL;                                    \
+            (node_ptr)->next = NULL;                                    \
+        }                                                               \
+    } while (0)
 
-void prepend(struct node* node, void* value, datum data_type);
-void append(struct node* node, void* value, datum data_type);
-void remove(struct node* node, void* value);
-void clear(struct node* node);
-// struct node* find(void* value);
-bool is_empty(struct node* node);
 
-#endif 
+#endif
