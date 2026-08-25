@@ -7,7 +7,7 @@
         type value;        \
         struct name *prev; \
         struct name *next; \
-    };
+    }
 
 #define INIT_LIST(node_ptr, val)                                        \
     do                                                                  \
