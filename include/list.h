@@ -26,4 +26,27 @@
     } while (0)
 
 
+#define LIST_ADD_AT_BEGINNING(head, val)                         \
+    do                                                           \
+    {                                                            \
+        __typeof__(head) node = (struct *)malloc(sizeof(*head)); \
+                                                                 \
+        if (node)                                                \
+        {                                                        \
+            node->value = (val);                                 \
+            node->prev = NULL;                                   \
+            node->next = (head);                                 \
+            if ((head) != NULL)                                  \
+            {                                                    \
+                (head)->prev = node;                             \
+            }                                                    \
+                                                                 \
+            (head) = node;                                       \
+        }                                                        \
+        else                                                     \
+        {                                                        \
+            printf("memory alloc failed\n");                     \
+        }                                                        \
+    } while (0)
+
 #endif
