@@ -25,28 +25,52 @@
         }                                                               \
     } while (0)
 
+#define LIST_ADD_AT_BEGINNING(head, val)                                     \
+    do                                                                       \
+    {                                                                        \
+        __typeof__(head) node = (__typeof__(node_ptr))malloc(sizeof(*head)); \
+                                                                             \
+        if (node)                                                            \
+        {                                                                    \
+            node->value = (val);                                             \
+            node->prev = NULL;                                               \
+            node->next = (head);                                             \
+            if ((head) != NULL)                                              \
+            {                                                                \
+                (head)->prev = node;                                         \
+            }                                                                \
+                                                                             \
+            (head) = node;                                                   \
+        }                                                                    \
+        else                                                                 \
+        {                                                                    \
+            printf("memory alloc failed\n");                                 \
+        }                                                                    \
+    } while (0)
 
-#define LIST_ADD_AT_BEGINNING(head, val)                         \
-    do                                                           \
-    {                                                            \
-        __typeof__(head) node = (struct *)malloc(sizeof(*head)); \
-                                                                 \
-        if (node)                                                \
-        {                                                        \
-            node->value = (val);                                 \
-            node->prev = NULL;                                   \
-            node->next = (head);                                 \
-            if ((head) != NULL)                                  \
-            {                                                    \
-                (head)->prev = node;                             \
-            }                                                    \
-                                                                 \
-            (head) = node;                                       \
-        }                                                        \
-        else                                                     \
-        {                                                        \
-            printf("memory alloc failed\n");                     \
-        }                                                        \
+#define LIST_ADD_AT_END(head, val)                                           \
+    do                                                                       \
+    {                                                                        \
+        __typeof__(head) node = (__typeof__(node_ptr))malloc(sizeof(*head)); \
+                                                                             \
+        if (node)                                                            \
+        {                                                                    \
+            node->next = NULL;                                               \
+            node->value = (val);                                             \
+                                                                             \
+            __typeof__(head) last = (head);                                  \
+            while (last->next != NULL)                                       \
+            {                                                                \
+                (last) = (last)->next;                                       \
+            }                                                                \
+                                                                             \
+            last->next = node;                                               \
+            node->prev = last;                                               \
+        }                                                                    \
+        else                                                                 \
+        {                                                                    \
+            printf("memory alloc failed\n");                                 \
+        }                                                                    \
     } while (0)
 
 #endif
