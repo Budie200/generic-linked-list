@@ -28,7 +28,7 @@
 #define LIST_ADD_AT_BEGINNING(head, val)                                     \
     do                                                                       \
     {                                                                        \
-        __typeof__(head) node = (__typeof__(node_ptr))malloc(sizeof(*head)); \
+        __typeof__(head) node = (__typeof__(head))malloc(sizeof(*head)); \
                                                                              \
         if (node)                                                            \
         {                                                                    \
@@ -51,7 +51,7 @@
 #define LIST_ADD_AT_END(head, val)                                           \
     do                                                                       \
     {                                                                        \
-        __typeof__(head) node = (__typeof__(node_ptr))malloc(sizeof(*head)); \
+        __typeof__(head) node = (__typeof__(head))malloc(sizeof(*head)); \
                                                                              \
         if (node)                                                            \
         {                                                                    \
